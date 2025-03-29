@@ -2,6 +2,7 @@ from flask import Flask, redirect, request, session, render_template, url_for, j
 import json
 import random
 import sqlite3
+from argon2 import PasswordHasher
 
 app = Flask(__name__)
 app.secret_key = '1111'
@@ -11,10 +12,13 @@ def db_izveide():
                id INTEGER PRIMARY KEY AUTOINCREMENT,
                username TEXT UNIQUE NOT NULL,
                password TEXT NOT NULL,
-               sentence_count INTEGER DEFAULT 0,
-               best_streak INTEGER DEFAULT 0)''')
+               sentence_count INTEGER DEFAULT 0''')
 
-    select_sql('INSERT OR IGNORE INTO users (username, password) VALUES (?, ?)', ("Admin", "qwerty"))
+    is_admin = select_sql("SELECT * FROM users WHERE username = 'Admin'")
+    if not is_admin:
+        password = b'qwerty321'
+        hash = PasswordHasher().hash(password)
+        select_sql('INSERT INTO users (username, password) VALUES (?, ?)', ("Admin", hash))
 
 with open('data/sentences.json', 'r', encoding = "utf-8") as s:
     x = s.read()
@@ -77,7 +81,7 @@ def input_check():
 def signup():
     if request.method == 'POST':
         username = request.form['username']
-        password = request.form['password']
+        password = PasswordHasher().hash(bytes(request.form['password'], "utf-8"))
         select_sql('INSERT OR IGNORE INTO users (username, password) VALUES (?, ?)', (username, password))
         return redirect('/')
     return render_template('login_signup.html')
@@ -87,14 +91,25 @@ def login():
     if request.method == 'POST':
         username = request.form['username']
         password = request.form['password']
+        hash_password = select_sql('SELECT password FROM users WHERE username = ?', (username,))
 
-        user = select_sql('SELECT id, username FROM users WHERE username = ? AND password = ?', (username, password))
+        # check if user exists
+        if hash_password:
+            hash_pw_bytes = bytes(''.join(hash_password[0]), "utf-8")
+            pw_bytes = bytes(password, "utf-8")
 
-        if user:
-            session['user_id'] = user[0][0]
-            session['username'] = user[0][1]
+            # check if passwords match
+            try:
+                PasswordHasher().verify(hash_pw_bytes, pw_bytes)
+            except:
+                return render_template('login_signup.html')
 
+            user_id = select_sql('SELECT id FROM users WHERE username = ?', (username,))
+
+            session['user_id'] = user_id[0][0]
+            session['username'] = username
             return redirect('/')
+        
     return render_template('login_signup.html')
 
 @app.route('/logout', methods=['POST', 'GET'])
@@ -138,7 +153,6 @@ def add_sentence():
 
 @app.route('/', methods=['POST', 'GET'])
 def sakums():
-    #session.clear()
     with open('data/sentences.json', 'r', encoding = "utf-8") as s:
         x = s.read()
         global sentences
