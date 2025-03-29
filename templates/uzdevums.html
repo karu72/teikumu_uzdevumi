@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="/static/style.css" rel="stylesheet" type="text/css" />
+</head>
+<body class="default">
+    <a href = "/"><button type = "button" id="back-btn">ATPAKAĻ</button></a>
+
+    <div id = "sentence">
+        <div>
+        </div>
+    </div> 
+    <div id = "examples"> </div>
+    <div id="feedback"></div>
+    <button class="btn-uzd" id="check-btn" onclick="checkAnswer()">PĀRBAUDĪT</button>
+
+    <button class="btn-uzd" id="next-btn" style="display: none;" onclick="loadNextSentence()">Nākamais</button>
+
+    <script>
+        let sentence_container = document.getElementById("sentence");
+        let example_container = document.getElementById("examples")
+
+        function displaySentence(words, index, examples){
+
+            let heading = document.createElement("h3");
+
+            for (let i = 0; i<words.length; i++) {
+                if (i == index) {
+                    sentence_container.innerHTML += '<input type="text" id="answer-input">';
+                    let input = document.createElement("input");
+                    input.type = "text";
+                    input.id = "answer-input";
+                
+                    heading.appendChild(input);
+                } else {
+                    heading.appendChild(document.createTextNode(words[i] + " "))
+                }
+            }
+
+            sentence_container.innerHTML = "";
+            sentence_container.appendChild(heading);
+
+            example_container.innerHTML = "";
+            
+            console.log(examples)
+            shuffle(examples)
+            console.log(examples)
+
+            for (let i = 0; i < examples.length; i++) {
+                let wordSpan = document.createElement("span");
+                wordSpan.textContent = examples[i];
+                
+                wordSpan.onclick = function() {
+                    document.getElementById("answer-input").value = examples[i];
+                };
+
+                example_container.appendChild(wordSpan);
+            }
+        }
+
+        function checkAnswer() {
+            let answer = document.getElementById("answer-input").value;
+            let input = document.getElementById("answer-input");
+
+            fetch('/input_check', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ answer: answer })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.result === 'correct') {
+                    input.style.borderColor = "green";
+                    input.style.backgroundColor = "#d4edda";
+
+                    document.getElementById("feedback").innerHTML = "Pareizi!"
+                    document.getElementById("next-btn").style.display = "inline";
+                    document.getElementById("check-btn").style.display = "none";
+                } else {
+                    input.style.borderColor = "red";
+                    input.style.backgroundColor = "#f8d7da";
+
+                    document.getElementById("feedback").innerHTML = "Nepareizi, mēģini vēlreiz"
+                }
+            });
+        }
+        
+        function loadNextSentence() {
+            fetch('/new_sentence')
+            .then(response => response.json())
+            .then(data => {
+                displaySentence(data.words, data.word_index, data.examples);
+                document.getElementById("next-btn").style.display = "none";
+                document.getElementById("feedback").innerHTML = ""
+                document.getElementById("check-btn").style.display = "inline";
+            });
+        }
+
+        function shuffle(array) {
+            for(let i = array.length-1; i>0; i--) {
+                const random = Math.floor(Math.random()*(i+1));
+
+                [array[i], array[random]] = [array[random], array[i]]
+            }
+        }
+
+        document.addEventListener("input", function(event) {
+            let input = document.getElementById("answer-input");
+            if (event.target === input) {
+                input.style.borderColor = "black";
+                input.style.backgroundColor = "white";
+                document.getElementById("feedback").innerHTML = "";
+            }
+        });
+
+        window.onload = loadNextSentence();
+    </script>
+</body>
+</html>

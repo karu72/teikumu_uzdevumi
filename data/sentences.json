@@ -1,0 +1,342 @@
+{
+  "easy": [
+    {
+      "words": [
+        "I",
+        "like",
+        "to",
+        "eat",
+        "apples"
+      ],
+      "examples": [
+        "apples",
+        "blue",
+        "tall",
+        "slow"
+      ],
+      "word_index": 4
+    },
+    {
+      "words": [
+        "She",
+        "has",
+        "a",
+        "cute",
+        "dog"
+      ],
+      "examples": [
+        "dog",
+        "running",
+        "yellow",
+        "soft"
+      ],
+      "word_index": 4
+    },
+    {
+      "words": [
+        "We",
+        "play",
+        "in",
+        "the",
+        "park"
+      ],
+      "examples": [
+        "park",
+        "quickly",
+        "round",
+        "big"
+      ],
+      "word_index": 4
+    },
+    {
+      "words": [
+        "He",
+        "drinks",
+        "cold",
+        "water"
+      ],
+      "examples": [
+        "water",
+        "jumping",
+        "strong",
+        "dark"
+      ],
+      "word_index": 3
+    },
+    {
+      "words": [
+        "The",
+        "sky",
+        "is",
+        "very",
+        "blue"
+      ],
+      "examples": [
+        "blue",
+        "fast",
+        "tiny",
+        "sleep"
+      ],
+      "word_index": 4
+    },
+    {
+      "words": [
+        "Birds",
+        "can",
+        "fly",
+        "very",
+        "high"
+      ],
+      "examples": [
+        "high",
+        "chair",
+        "sharp",
+        "slow"
+      ],
+      "word_index": 4
+    },
+    {
+      "words": [
+        "I",
+        "wear",
+        "a",
+        "warm",
+        "coat"
+      ],
+      "examples": [
+        "coat",
+        "running",
+        "jump",
+        "green"
+      ],
+      "word_index": 4
+    },
+    {
+      "words": [
+        "She",
+        "reads",
+        "a",
+        "good",
+        "book"
+      ],
+      "examples": [
+        "book",
+        "soft",
+        "driving",
+        "hungry"
+      ],
+      "word_index": 4
+    },
+    {
+      "words": [
+        "They",
+        "build",
+        "a",
+        "big",
+        "house"
+      ],
+      "examples": [
+        "house",
+        "tasty",
+        "fast",
+        "blue"
+      ],
+      "word_index": 4
+    },
+    {
+      "words": [
+        "We",
+        "saw",
+        "a",
+        "tall",
+        "tree"
+      ],
+      "examples": [
+        "tree",
+        "sleep",
+        "happy",
+        "shiny"
+      ],
+      "word_index": 4
+    },
+    {
+      "words": [
+        "The",
+        "scientist",
+        "conducted",
+        "an",
+        "experiment"
+      ],
+      "examples": [
+        "bright",
+        "running",
+        "loud",
+        "experiment"
+      ],
+      "word_index": 4
+    },
+    {
+      "words": [
+        "We",
+        "went",
+        "to",
+        "the",
+        "park",
+        "yesterday"
+      ],
+      "examples": [
+        "went",
+        "go",
+        "gone",
+        "saw"
+      ],
+      "word_index": 1
+    }
+  ],
+  "medium": [
+    {
+      "words": [
+        "She",
+        "prefers",
+        "reading",
+        "historical",
+        "novels"
+      ],
+      "examples": [
+        "tasty",
+        "historical",
+        "round",
+        "flying"
+      ],
+      "word_index": 3
+    },
+    {
+      "words": [
+        "The",
+        "architect",
+        "designed",
+        "a",
+        "building"
+      ],
+      "examples": [
+        "soft",
+        "quick",
+        "hungry",
+        "building"
+      ],
+      "word_index": 4
+    },
+    {
+      "words": [
+        "He",
+        "delivered",
+        "an",
+        "inspiring",
+        "speech"
+      ],
+      "examples": [
+        "jumping",
+        "silent",
+        "yellow",
+        "speech"
+      ],
+      "word_index": 4
+    },
+    {
+      "words": [
+        "The",
+        "artist",
+        "painted",
+        "a",
+        "portrait"
+      ],
+      "examples": [
+        "tiny",
+        "fast",
+        "sleep",
+        "portrait"
+      ],
+      "word_index": 4
+    },
+    {
+      "words": [
+        "The",
+        "engineers",
+        "constructed",
+        "a",
+        "bridge"
+      ],
+      "examples": [
+        "glowing",
+        "sharp",
+        "weak",
+        "bridge"
+      ],
+      "word_index": 4
+    },
+    {
+      "words": [
+        "She",
+        "investigated",
+        "a",
+        "mysterious",
+        "case"
+      ],
+      "examples": [
+        "strong",
+        "dancing",
+        "bright",
+        "case"
+      ],
+      "word_index": 4
+    },
+    {
+      "words": [
+        "He",
+        "wrote",
+        "a",
+        "detailed",
+        "report"
+      ],
+      "examples": [
+        "soft",
+        "report",
+        "driving",
+        "hungry"
+      ],
+      "word_index": 4
+    },
+    {
+      "words": [
+        "The",
+        "professor",
+        "gave",
+        "an",
+        "lecture"
+      ],
+      "examples": [
+        "blue",
+        "fast",
+        "tasty",
+        "lecture"
+      ],
+      "word_index": 4
+    },
+    {
+      "words": [
+        "She",
+        "discovered",
+        "a",
+        "rare",
+        "gem"
+      ],
+      "examples": [
+        "happy",
+        "gem",
+        "shiny",
+        "sleep"
+      ],
+      "word_index": 4
+    }
+  ]
+}
