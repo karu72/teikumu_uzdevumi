@@ -1,12 +1,13 @@
 document.addEventListener("DOMContentLoaded", function () {
 
-    document.getElementById("add-sentence-form").addEventListener("submit", function (event) {
+    document.getElementById("add_sentence_form").addEventListener("submit", function (event) {
         event.preventDefault();
 
         let difficulty = document.getElementById("difficulty").value;
         let words = document.getElementById("sentence").value.trim().split(" ");
-        let word_index = parseInt(document.getElementById("word_index").value, 10);
-        let examples = document.getElementById("examples").value.split(",").map(e => e.trim());
+        let word_index = parseInt(document.getElementById("word_index").value);
+        console.log(word_index)
+        let examples = document.getElementById("examples").value.split(",").map(word => word.trim());
 
         fetch("/add_sentence", {
             method: "POST",

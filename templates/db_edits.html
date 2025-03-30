@@ -3,36 +3,32 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Manage Sentences</title>
-    <link href="/static/style.css" rel="stylesheet" type="text/css" />
+    <title>Document</title>
+    <link href="/static/db_edits.css" rel="stylesheet" type="text/css" />
     <script src="/static/db_edits.js"></script>
 </head>
-<body class="default">
-    <h1>Manage Sentences</h1>
+<body class="db_edits">
+    <h1>Teikumu Pievienošana</h1>
 
-    <!-- Form to Add New Sentence -->
-    <form id="add-sentence-form">
-        <label>Sentence:</label>
+    <form id="add_sentence_form">
+        <label>Teikums:</label>
         <input type="text" id="sentence" required><br>
 
-        <label>Missing Word Index:</label>
+        <label>Pazudušā vārda indekss:</label>
         <input type="number" id="word_index" required min="0"><br>
 
-        <label>Examples (comma separated):</label>
+        <label>Piemēri (atdali ar komatu):</label>
         <input type="text" id="examples" required><br>
 
-        <label>Difficulty:</label>
+        <label>Grūtības pakāpe:</label>
         <select id="difficulty">
-            <option value="easy">Easy</option>
-            <option value="medium">Medium</option>
+            <option value="easy">Vienkārši</option>
+            <option value="medium">Viduvēji</option>
         </select><br>
 
-        <button type="submit">Add Sentence</button>
+        <button type="submit">Pievienot</button>
     </form>
 
-    <h2>Existing Sentences</h2>
-    <div id="sentence-list"></div>
-
-    <button onclick="window.location.href='/'">Atpakaļ</button>
+    <a href = "/"><button type = "button">ATPAKAĻ</button></a>
 </body>
 </html>

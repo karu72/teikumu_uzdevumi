@@ -1,12 +1,11 @@
-
 .default {
     font-family: Verdana, Geneva, Tahoma, sans-serif;
-    background-color: #ffea9e;
+    background: linear-gradient(to right, #ffea9e,#ffd89e);
     text-align: center;
     align-items: center;
     flex-direction: column;
-    /* justify-content: center; */
-    display: flex
+    display: flex;
+    height: 100vh
 }
 #feedback {
     font-weight: bold;
@@ -64,7 +63,6 @@
     flex-wrap: wrap;
 }
 #examples span {
-    /* display: inline-block; */
     margin: 5px;
     margin-left: 8px;
     margin-right: 8px;
@@ -91,18 +89,19 @@ button:hover {
 #sakums{
     margin-top: 25px
 }
-#acc-btns{
+.start-btns{
     margin-bottom: 10px;
-}
-#lvl-btns{
-    margin-bottom:10px
-}
-#info-btn{
-    margin-bottom:10px
 }
 #lvl1-btn{
     background-color: rgb(37, 255, 110);
 }
 #lvl2-btn{
     background-color: rgb(246, 255, 0);
+}
+.username {
+    margin: 15px;
+}
+.count {
+    margin-bottom: 20px;
+    font-size:large;
 }

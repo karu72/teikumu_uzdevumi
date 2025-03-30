@@ -1,0 +1,18 @@
+.db_edits {
+    background-color: #ffea9e;
+    margin:10px;
+    background: linear-gradient(to left, #ffea9e,#ffd89e);
+    height: 100vh
+}
+label, input {
+    display: inline-block;
+}
+
+label {
+    font-size:large;
+    margin-bottom: 10px;
+}
+button {
+    font-size:large;
+    margin-bottom: 10px;
+}

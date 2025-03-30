@@ -191,6 +191,23 @@
         "saw"
       ],
       "word_index": 1
+    },
+    {
+      "words": [
+        "His",
+        "cup",
+        "of",
+        "water",
+        "was",
+        "full"
+      ],
+      "examples": [
+        "plate",
+        "cup",
+        "chair",
+        "spoon"
+      ],
+      "word_index": 1
     }
   ],
   "medium": [
@@ -337,6 +354,45 @@
         "sleep"
       ],
       "word_index": 4
+    },
+    {
+      "words": [
+        "He",
+        "had",
+        "gone",
+        "to",
+        "the",
+        "store",
+        "by",
+        "then"
+      ],
+      "examples": [
+        "went",
+        "gone",
+        "go",
+        "see"
+      ],
+      "word_index": 2
+    },
+    {
+      "words": [
+        "The",
+        "elephant",
+        "at",
+        "the",
+        "zoo",
+        "had",
+        "a",
+        "big",
+        "trunk"
+      ],
+      "examples": [
+        "hippo",
+        "elephant",
+        "giraffe",
+        "koala"
+      ],
+      "word_index": 1
     }
   ]
 }

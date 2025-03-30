@@ -9,25 +9,25 @@
 <body class="default">
     <div id="sakums">
         {%if 'user_id' not in session%}
-            <form method="POST" id="acc-btns">
+            <form method="POST" class="start-btns">
                 <button type="submit" name="account" value="login">PIESLĒGTIES</button>
                 <button type="submit" name="account" value="signup">IZVEIDOT KONTU</button>
             </form>
         {%endif%}
 
-        <form method="POST" action="/new_sentence" id="lvl-btns">
+        <form method="POST" action="/new_sentence" class="start-btns">
             <button type="submit" name="level" value="easy" id="lvl1-btn">VIENKĀRŠI</button>
             <button type="submit" name="level" value="medium" id="lvl2-btn">GRŪTĀKI</button>
         </form>
         {%if 'user_id' in session%}
-            <a href = "/user_info"><button type = "button" id="info-btn">INFO</button></a>
-            <form method="POST" action="/logout">
-                <button type="submit" name="logout">LOGOUT</button>
+            <a href = "/user_info"><button type = "button" class="start-btns">INFO</button></a>
+            <form method="POST" action="/logout" class="start-btns">
+                <button type="submit" name="logout">ATSLĒGTIES</button>
             </form>
         {%endif%}
 
         {%if session['username'] == 'Admin'%}
-            <a href = "/db_edits"><button type = "button" id="info-btn">PIEVIENOT JAUNU TEIKUMU</button></a>
+            <a href = "/db_edits"><button type = "button" class="start-btns">PIEVIENOT JAUNU TEIKUMU</button></a>
         {%endif%}
     </div>
 </body>

@@ -7,12 +7,16 @@ from argon2 import PasswordHasher
 app = Flask(__name__)
 app.secret_key = '1111'
 
+global current_streak
+current_streak = 0
+
 def db_izveide():
     select_sql('''CREATE TABLE IF NOT EXISTS users (
                id INTEGER PRIMARY KEY AUTOINCREMENT,
                username TEXT UNIQUE NOT NULL,
                password TEXT NOT NULL,
-               sentence_count INTEGER DEFAULT 0''')
+               sentence_count INTEGER DEFAULT 0,
+               best_streak INTEGER DEFAULT 0)''')
 
     is_admin = select_sql("SELECT * FROM users WHERE username = 'Admin'")
     if not is_admin:
@@ -69,11 +73,18 @@ def input_check():
     curr_sentence_data = sentences[session['curr_sentence']]
     correct_word = curr_sentence_data['words'][curr_sentence_data['word_index']]
 
+    global current_streak
+
     if user_input.lower() == correct_word.lower():
         if 'user_id' in session:
             select_sql('UPDATE users SET sentence_count = sentence_count + 1 WHERE id = ?', (session['user_id'],))
+            current_streak += 1
         return jsonify({'result': 'correct'})
     else:
+        best_streak = select_sql('SELECT best_streak FROM users WHERE id = ?', (session['user_id'],))
+        if current_streak > best_streak[0][0]:
+            select_sql('UPDATE users SET best_streak = ? WHERE id = ?', (current_streak, session['user_id'],))
+            current_streak = 0
         return jsonify({'result': 'incorrect'})
 
 
@@ -93,12 +104,10 @@ def login():
         password = request.form['password']
         hash_password = select_sql('SELECT password FROM users WHERE username = ?', (username,))
 
-        # check if user exists
         if hash_password:
             hash_pw_bytes = bytes(''.join(hash_password[0]), "utf-8")
             pw_bytes = bytes(password, "utf-8")
 
-            # check if passwords match
             try:
                 PasswordHasher().verify(hash_pw_bytes, pw_bytes)
             except:
@@ -122,8 +131,10 @@ def logout():
 def user_info():
     username = select_sql('SELECT username FROM users WHERE id = ?', (session['user_id'],))
     count = select_sql('SELECT sentence_count FROM users WHERE id = ?', (session['user_id'],))
+    streak = select_sql('SELECT best_streak FROM users WHERE id = ?', (session['user_id'],))
 
-    return render_template('user_info.html', username=username[0][0], count=count[0][0])
+
+    return render_template('user_info.html', username=username[0][0], count=count[0][0], streak=streak[0][0])
 
 
 @app.route('/db_edits')
@@ -148,7 +159,7 @@ def add_sentence():
     with open("data/sentences.json", "w") as file:
         json.dump(sentences, file, indent=2)
 
-    return jsonify({"message": "Sentence added successfully!"})
+    return jsonify({"message": "Teikums pievienots!"})
 
 
 @app.route('/', methods=['POST', 'GET'])
