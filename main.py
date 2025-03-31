@@ -81,10 +81,11 @@ def input_check():
             current_streak += 1
         return jsonify({'result': 'correct'})
     else:
-        best_streak = select_sql('SELECT best_streak FROM users WHERE id = ?', (session['user_id'],))
-        if current_streak > best_streak[0][0]:
-            select_sql('UPDATE users SET best_streak = ? WHERE id = ?', (current_streak, session['user_id'],))
-            current_streak = 0
+        if 'user_id' in session:
+            best_streak = select_sql('SELECT best_streak FROM users WHERE id = ?', (session['user_id'],))
+            if current_streak > best_streak[0][0]:
+                select_sql('UPDATE users SET best_streak = ? WHERE id = ?', (current_streak, session['user_id'],))
+                current_streak = 0
         return jsonify({'result': 'incorrect'})
 
 
