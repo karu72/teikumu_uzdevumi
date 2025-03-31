@@ -56,8 +56,6 @@ def new_sentence():
             session['curr_sentence'] = i
             session[f"used_sentences_{level}"].append(i)
 
-            print(session[f"used_sentences_{level}"], ", LENGTH: ", len(session[f"used_sentences_{level}"]))
-
             if len(session[f"used_sentences_{level}"]) == len(sentences):
                 session[f"used_sentences_{level}"].clear()
             
