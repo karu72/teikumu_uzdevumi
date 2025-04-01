@@ -36,11 +36,12 @@ def uzdevums():
 
 @app.route('/new_sentence', methods=['POST', 'GET'])
 def new_sentence():
+    global level
+
     if request.method == 'POST':
-        session['level'] = request.form['level']
+        level = request.form['level']
         return redirect(url_for('uzdevums'))
 
-    level = session['level']
     current_sentences = sentences[level] # grūtības pakāpei atbilstošie teikumi
 
     while True:
@@ -62,7 +63,6 @@ def new_sentence():
 
 @app.route('/input_check', methods=['POST'])
 def input_check():
-    level = session['level']
     current_sentences = sentences[level]
 
     data = request.get_json()
