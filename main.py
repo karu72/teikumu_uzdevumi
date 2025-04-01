@@ -36,18 +36,15 @@ def uzdevums():
 
 @app.route('/new_sentence', methods=['POST', 'GET'])
 def new_sentence():
-    
     if request.method == 'POST':
-        level = request.form['level']
-        global sentences
-        sentences = sentences[level]
-        session['level'] = level
-
+        session['level'] = request.form['level']
         return redirect(url_for('uzdevums'))
-            
+
     level = session['level']
+    current_sentences = sentences[level] # grūtības pakāpei atbilstošie teikumi
+
     while True:
-        i = random.randrange(len(sentences))
+        i = random.randrange(len(current_sentences))
 
         if f"used_sentences_{level}" not in session:
             session[f"used_sentences_{level}"] = []
@@ -56,19 +53,22 @@ def new_sentence():
             session['curr_sentence'] = i
             session[f"used_sentences_{level}"].append(i)
 
-            if len(session[f"used_sentences_{level}"]) == len(sentences):
+            if len(session[f"used_sentences_{level}"]) == len(current_sentences):
                 session[f"used_sentences_{level}"].clear()
             
-            sentence = sentences[i]
+            sentence = current_sentences[i]
             return jsonify(sentence)
 
 
 @app.route('/input_check', methods=['POST'])
 def input_check():
+    level = session['level']
+    current_sentences = sentences[level]
+
     data = request.get_json()
 
     user_input = data.get('answer', '').strip()
-    curr_sentence_data = sentences[session['curr_sentence']]
+    curr_sentence_data = current_sentences[session['curr_sentence']]
     correct_word = curr_sentence_data['words'][curr_sentence_data['word_index']]
 
     global current_streak
@@ -163,11 +163,6 @@ def add_sentence():
 
 @app.route('/', methods=['POST', 'GET'])
 def sakums():
-    with open('data/sentences.json', 'r', encoding = "utf-8") as s:
-        x = s.read()
-        global sentences
-        sentences = json.loads(x)
-
     if request.method == 'POST':
         account = request.form['account']
         return redirect(url_for(f"{account}"))
